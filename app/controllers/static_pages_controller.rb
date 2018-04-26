@@ -13,6 +13,7 @@ class StaticPagesController < ApplicationController
   end
   
   def contact
+    #app/views/static_pages/contact.html.erb
   end
   
 end
