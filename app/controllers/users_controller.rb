@@ -25,6 +25,15 @@ class UsersController < ApplicationController
     
     if @user.save # => validation
       #success
+      
+      flash[:success] = "Welcome to the Sample App!"
+      
+      redirect_to @user
+      # GET "/users/#{@user.id}" => show
+      
+      # redirect_to user_path(@user)
+      # redirect_to user_path(@user.id)
+      # redirect_to "/users/#{@user.id}"
     else
       #failures
       render 'new'
