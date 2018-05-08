@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  include SessionsHelper
+
   def new
     #@session = Session.new  modelがないので不可
   end
@@ -13,7 +15,8 @@ class SessionsController < ApplicationController
     #nil -> false
     if user && user.authenticate(params[:session][:password]) #User object or false
       # ユーザーログイン後にユーザー情報のページにリダイレクトする
-      
+      log_in user
+      redirect_to user
     else
       # エラーメッセージを作成する
       #flash[:danger] = 'Invaild email/password combination'
