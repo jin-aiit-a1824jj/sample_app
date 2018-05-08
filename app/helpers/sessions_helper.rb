@@ -43,7 +43,7 @@ module SessionsHelper
       @current_user ||= User.find_by(id: user_id)
       
     elsif (user_id = cookies.signed[:user_id])
-      
+      #raise       # テストがパスすれば、この部分がテストされていないことがわかる #リスト 9.29: テストされていないブランチで例外を発生する
       user = User.find_by(id: user_id)
       
       if user && user.authenticated?(cookies[:remember_token])

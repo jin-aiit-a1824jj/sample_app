@@ -14,9 +14,12 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password]) #User object or false
       # ユーザーログイン後にユーザー情報のページにリダイレクトする
       log_in user
-      
+     
       #remember => save to DB + cookies[:token]
-      remember user #SessionsHelper method
+      #remember user #SessionsHelper method
+      
+      #リスト 9.23: [remember me] チェックボックスの送信結果を処理する
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user) #remember_meのデフォルト値はINTではなく文字！
       
       redirect_to user
     else
