@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
   
   #DELETE /logout
   def destroy
-    log_out
+    log_out if logged_in? #リスト 9.16: ログイン中の場合のみログアウトする
     redirect_to root_url
   end
 
