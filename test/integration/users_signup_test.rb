@@ -33,6 +33,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     # Test
     
     assert_template 'users/show'
+    assert is_logged_in?
   end
   
 end

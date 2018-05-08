@@ -1,7 +1,5 @@
 class SessionsController < ApplicationController
 
-  include SessionsHelper
-
   def new
     #@session = Session.new  modelがないので不可
   end

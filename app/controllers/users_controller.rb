@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+
   def show
     # 変数 ーローカル変数変数
     # @変数 ーインスタンス変数
@@ -25,6 +25,8 @@ class UsersController < ApplicationController
     
     if @user.save # => validation
       #success
+      
+      log_in @user #ユーザー登録中にログインする
       
       flash[:success] = "Welcome to the Sample App!"
       

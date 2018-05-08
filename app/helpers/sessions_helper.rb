@@ -24,7 +24,7 @@ module SessionsHelper
 
   # ユーザーがログインしていればtrue、その他ならfalseを返す
   def logged_in?
-    !current_user.nil?
+    !current_user.nil? #関数のcurrent_userです。
     #debugger
   end
 
