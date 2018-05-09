@@ -10,7 +10,11 @@ class User < ApplicationRecord
             uniqueness:{case_sensitive: false} #unique: true
   
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  
+  #リスト 10.13: パスワードが空のままでも更新できるようにする
+  #validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  
   
    # 渡された文字列のハッシュ値を返す
   def User.digest(string)#class method （static methodと近い？）、instance methodは インスタンスを作ってから使える

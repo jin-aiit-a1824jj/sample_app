@@ -9,10 +9,12 @@ class UsersController < ApplicationController
     # debugger #break point, next step exit 使用しない時は解除！
   end
 
+  # GET /users/new
   def new
     @user = User.new
   end
 
+  # POST /users
   def create
     #@user = User.new
     #@user.name  = params[:user][:name]
@@ -44,9 +46,32 @@ class UsersController < ApplicationController
     
   end
 
-
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  # GET /users/:id/edit
+  # params[:id] -> :id
+  def edit
+    @user = User.find(params[:id])
+    # -> app/views/users/edit.html.erb
   end
+  
+  #PATCH /users/:id
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      #success
+      flash[:success] = "Profile updated"
+      redirect_to @user
+    else
+      #false
+      # -> @user.errors.full_messages()
+      render 'edit'
+    end
+  end
+  
+
+  private
+  
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
 
 end
