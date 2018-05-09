@@ -1,8 +1,15 @@
 class UsersController < ApplicationController
   #リスト 10.15: beforeフィルターにlogged_in_userを追加する #リスト 10.19: セキュリティモデルを確認するためにbeforeフィルターをコメントアウトする
-  before_action :logged_in_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update]#リスト 10.35: indexアクションにはログインを要求する
   #リスト 10.25: beforeフィルターを使って編集/更新ページを保護する
   before_action :correct_user,   only: [:edit, :update]
+  
+  #リスト 10.36: ユーザーのindexアクション
+  def index
+    #@users = User.all
+    #リスト 10.46: indexアクションでUsersをページネートする
+    @users = User.paginate(page: params[:page])
+  end
   
   def show
     # 変数 ーローカル変数変数

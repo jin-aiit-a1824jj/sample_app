@@ -1,0 +1,14 @@
+<% provide(:title, 'All users') %>
+<h1>All users</h1>
+
+<!-- リスト 10.45: indexページでpaginationを使う -->
+<%= will_paginate %> <!-- will_paginate @user -->
+
+
+<ul class="users">
+  <!-- リスト 10.50: indexビューに対する最初のリファクタリング -->
+  <!-- リスト 10.52: indexページの完全なリファクタリング -->
+  <%= render @users %>
+</ul>
+
+<%= will_paginate %>
