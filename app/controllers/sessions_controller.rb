@@ -21,7 +21,8 @@ class SessionsController < ApplicationController
       #リスト 9.23: [remember me] チェックボックスの送信結果を処理する
       params[:session][:remember_me] == '1' ? remember(user) : forget(user) #remember_meのデフォルト値はINTではなく文字！
       
-      redirect_to user
+      #redirect_to user
+      redirect_back_or user #リスト 10.32: フレンドリーフォワーディングを備えたcreateアクション
     else
       # エラーメッセージを作成する
       #flash[:danger] = 'Invaild email/password combination'

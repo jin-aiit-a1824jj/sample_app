@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
-
+  #リスト 10.15: beforeフィルターにlogged_in_userを追加する #リスト 10.19: セキュリティモデルを確認するためにbeforeフィルターをコメントアウトする
+  before_action :logged_in_user, only: [:edit, :update]
+  #リスト 10.25: beforeフィルターを使って編集/更新ページを保護する
+  before_action :correct_user,   only: [:edit, :update]
+  
   def show
     # 変数 ーローカル変数変数
     # @変数 ーインスタンス変数
@@ -74,4 +78,27 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
+
+    # beforeアクション
+
+    # ログイン済みユーザーかどうか確認
+    def logged_in_user
+      unless logged_in?
+        # GET /users/:id/edit 今回の想定ではこれだけ
+        # PATCH /users/:id いらない
+        # => GET /users/:id
+        store_location #リスト 10.31: ログインユーザー用beforeフィルターにstore_locationを追加する
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
+    
+    # 正しいユーザーかどうか確認
+    def correct_user
+      # GET /users/:id/edit
+      # PATCH /users/:id
+      @user = User.find(params[:id])
+      #redirect_to(root_url) unless @user == current_user
+      redirect_to(root_url) unless current_user?(@user)
+    end
 end
