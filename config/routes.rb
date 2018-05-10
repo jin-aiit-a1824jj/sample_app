@@ -17,6 +17,14 @@ Rails.application.routes.draw do
   
   resources :users
   
+  
+  #リスト 11.1: アカウント有効化に使うリソース
+  # GET "/account_activations/:id/edit"
+  # params[:id] <--- 有効化トークン
+  # Controller: params[:id]
+  resources :account_activations, only: [:edit]
+  
+  
   # => contact_path
   
   #get 'static_pages/home'
@@ -26,5 +34,6 @@ Rails.application.routes.draw do
 
   #root 'application#hello'
   #
+  
   
 end

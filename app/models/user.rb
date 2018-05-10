@@ -1,6 +1,9 @@
 class User < ApplicationRecord
-  
-  attr_accessor :remember_token#getter setter
+  #getter setter
+  attr_accessor :remember_token, :activation_token
+  #リスト 11.3: Userモデルにアカウント有効化のコードを追加する
+  before_save   :downcase_email#before_save →新しく生成か、更新するさい反応
+  before_create :create_activation_digest #before_create→メソッド参照, 新しくサインアップ（新しく生成）のみcallback!
   
   validates(:name, presence: true, length: { maximum: 50 })
   
@@ -57,5 +60,19 @@ class User < ApplicationRecord
   def forget
     self.update_attribute(:remember_digest, nil)#remember_digest nullにする
   end
+  
+  private
+    #リスト 11.3: Userモデルにアカウント有効化のコードを追加する
+    # メールアドレスをすべて小文字にする
+    def downcase_email
+      self.email = email.downcase
+    end
+
+    # 有効化トークンとダイジェストを作成および代入する
+    def create_activation_digest
+      self.activation_token  = User.new_token
+      self.activation_digest = User.digest(self.activation_token)
+      # @user.activation_digest => hash値
+    end
   
 end
