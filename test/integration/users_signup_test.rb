@@ -32,8 +32,9 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     
     # Test
     
-    assert_template 'users/show'
-    assert is_logged_in?
+    #リスト 11.24: 失敗するテストを一時的にコメントアウトする
+    #assert_template 'users/show'
+    #assert is_logged_in?
   end
   
 end

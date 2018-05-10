@@ -41,11 +41,14 @@ class UsersController < ApplicationController
     if @user.save # => validation
       #success
       
-      log_in @user #ユーザー登録中にログインする
+      #リスト 11.23: ユーザー登録にアカウント有効化を追加する
+      UserMailer.account_activation(@user).deliver_now
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
       
-      flash[:success] = "Welcome to the Sample App!"
-      
-      redirect_to @user
+      #log_in @user #ユーザー登録中にログインする
+      #flash[:success] = "Welcome to the Sample App!"
+      #redirect_to @user
       # GET "/users/#{@user.id}" => show
       
       # redirect_to user_path(@user)
