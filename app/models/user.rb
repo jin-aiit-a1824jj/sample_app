@@ -48,17 +48,32 @@ class User < ApplicationRecord
   end
   
   # 渡されたトークンがダイジェストと一致したらtrueを返す
-  def authenticated?(remember_token)
-    
+  #def authenticated?(remember_token)
     #リスト 9.19: authenticated?を更新して、ダイジェストが存在しない場合に対応 
-    return false if remember_digest.nil?
-    
-    BCrypt::Password.new(self.remember_digest).is_password?(remember_token)
+    #return false if remember_digest.nil?
+    #BCrypt::Password.new(self.remember_digest).is_password?(remember_token)
+  #end
+  def authenticated?(attribute, token)#リスト 11.26: 抽象化されたauthenticated?メソッド
+    digest = self.send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
   end
   
   # ユーザーのログイン情報を破棄する
   def forget
     self.update_attribute(:remember_digest, nil)#remember_digest nullにする
+  end
+  
+  #リスト 11.35: Userモデルにユーザー有効化メソッドを追加する
+  # アカウントを有効にする
+  def activate
+    update_attribute(:activated,    true)
+    update_attribute(:activated_at, Time.zone.now)
+  end
+
+  # 有効化用のメールを送信する
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
   end
   
   private

@@ -51,7 +51,9 @@ module SessionsHelper
       #raise       # テストがパスすれば、この部分がテストされていないことがわかる #リスト 9.29: テストされていないブランチで例外を発生する
       user = User.find_by(id: user_id)
       
-      if user && user.authenticated?(cookies[:remember_token])
+      #if user && user.authenticated?(cookies[:remember_token])
+      #11.28: current_user内の抽象化したauthenticated?メソッド
+      if user && user.authenticated?(:remember, cookies[:remember_token])
         log_in user
         @current_user = user
       end

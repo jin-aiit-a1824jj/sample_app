@@ -41,8 +41,10 @@ class UsersController < ApplicationController
     if @user.save # => validation
       #success
       
+      @user.send_activation_email #リスト 11.36: ユーザーモデルオブジェクトからメールを送信する
+      
       #リスト 11.23: ユーザー登録にアカウント有効化を追加する
-      UserMailer.account_activation(@user).deliver_now
+      #UserMailer.account_activation(@user).deliver_now
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url
       
