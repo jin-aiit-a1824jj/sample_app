@@ -26,9 +26,13 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  #リスト 11.16: development環境のメール設定
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :test
+  host = 'bf89b2b37a154dd2a293011968181228.vfs.cloud9.us-east-2.amazonaws.com' # ここをコピペすると失敗します。自分の環境に合わせてください。
+  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+  
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
