@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   get 'sessions/new'
 
   #get 'users/new'
@@ -24,6 +28,9 @@ Rails.application.routes.draw do
   # Controller: params[:id]
   resources :account_activations, only: [:edit]
   
+  
+  #リスト 12.1: パスワード再設定用リソースを追加する
+  resources :password_resets,     only: [:new, :create, :edit, :update]
   
   # => contact_path
   
