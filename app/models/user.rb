@@ -89,6 +89,12 @@ class User < ApplicationRecord
     UserMailer.password_reset(self).deliver_now
   end
   
+  #リスト 12.17: Userモデルにパスワード再設定用メソッドを追加する
+  # パスワード再設定の期限が切れている場合はtrueを返す
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
+  end
+  
   private
     #リスト 11.3: Userモデルにアカウント有効化のコードを追加する
     # メールアドレスをすべて小文字にする
