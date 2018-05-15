@@ -28,3 +28,6 @@
 
 #github id password
 .netrc
+
+# アップロードされたテスト画像を無視する
+/public/uploads
