@@ -9,7 +9,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader:
   # リスト 13.69: 本番環境での画像アップロードを調整する
   if Rails.env.production?
-    storage :fog
+    storage :file#storage :fog
   else
     storage :file
   end
