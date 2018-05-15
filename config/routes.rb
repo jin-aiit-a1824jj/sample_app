@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   #リスト 12.1: パスワード再設定用リソースを追加する
   resources :password_resets,     only: [:new, :create, :edit, :update]
   
+  #リスト 13.30: マイクロポストリソースのルーティング
+  resources :microposts,          only: [:create, :destroy]
+  
   # => contact_path
   
   #get 'static_pages/home'

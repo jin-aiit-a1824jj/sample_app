@@ -99,6 +99,17 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
   
+  #リスト 13.46: マイクロポストのステータスフィードを実装するための準備
+  # 試作feedの定義
+  # 完全な実装は次章の「ユーザーをフォローする」を参照
+  # current_user.feed
+  # current_user.id
+  # current_user.microposts
+  def feed
+    Micropost.where("user_id = ?", self.id)
+  end
+  
+  
   private
     #リスト 11.3: Userモデルにアカウント有効化のコードを追加する
     # メールアドレスをすべて小文字にする

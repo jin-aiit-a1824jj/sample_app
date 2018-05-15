@@ -105,18 +105,8 @@ class UsersController < ApplicationController
 
 
     # beforeアクション
-
-    # ログイン済みユーザーかどうか確認
-    def logged_in_user
-      unless logged_in?
-        # GET /users/:id/edit 今回の想定ではこれだけ
-        # PATCH /users/:id いらない
-        # => GET /users/:id
-        store_location #リスト 10.31: ログインユーザー用beforeフィルターにstore_locationを追加する
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
-    end
+    #リスト 13.33: Usersコントローラ内のlogged_in_userフィルターを削除する
+    
     
     # 正しいユーザーかどうか確認
     def correct_user
