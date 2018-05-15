@@ -20,6 +20,10 @@ class UsersController < ApplicationController
     #@user = User.find_by(params[:id])
     # @user => app/views/users/show.html.erb
     # debugger #break point, next step exit 使用しない時は解除！
+    
+    #リスト 13.23: @micropostsインスタンス変数をshowアクションに追加する
+    @microposts = @user.microposts.paginate(page: params[:page])
+    
   end
 
   # GET /users/new
