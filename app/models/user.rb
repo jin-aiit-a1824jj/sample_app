@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  #リスト 13.11: ユーザーがマイクロポストを複数所有する (has_many) 関連付けrail
+  #リスト 13.19: マイクロポストは、その所有者 (ユーザー) と一緒に破棄されることを保証する
+  has_many :microposts, dependent: :destroy
+  
   #getter setter
   attr_accessor :remember_token, :activation_token, :reset_token
   #リスト 11.3: Userモデルにアカウント有効化のコードを追加する
