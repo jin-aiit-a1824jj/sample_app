@@ -41,7 +41,7 @@ class SessionsController < ApplicationController
       # エラーメッセージを作成する
       #flash[:danger] = 'Invaild email/password combination'
       #flash 次のリクエストがくるまで生きている flash.nowを使う
-      flash.now[:danger] = 'Invaild email/password combination'
+      flash.now[:danger] ='Invaild email/password combination'
       render 'new'
     end
   end
