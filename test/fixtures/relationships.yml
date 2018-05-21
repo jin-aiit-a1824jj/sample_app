@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+#リスト 14.6: Relationship用のfixtureを空にする
+# 空にする
+#one:
+#  follower_id: 1
+#  followed_id: 1
+#
+#two:
+#  follower_id: 1
+#  followed_id: 1

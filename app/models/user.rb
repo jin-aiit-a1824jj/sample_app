@@ -3,6 +3,21 @@ class User < ApplicationRecord
   #リスト 13.19: マイクロポストは、その所有者 (ユーザー) と一緒に破棄されることを保証する
   has_many :microposts, dependent: :destroy
   
+  #リスト 14.2: 能動的関係に対して1対多 (has_many) の関連付けを実装する
+  #active_relationships(適当な名前、 明示的に→class_name: "Relationship"、外部キーを明示的に指定（foreign_key: "follower_id"）)
+  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  #=> @user.active_relationships (使えるはず)....
+  
+  #リスト 14.12: 受動的関係を使ってuser.followersを実装する
+  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  
+  #リスト 14.8: Userモデルにfollowingの関連付けを追加する
+  #followingメッソド定義、active_relationshipsの中で、followedを実行 <- @user.active_relationships.map(&:followed) <- @user.active_relationships.map { |r|  r.followed }
+  has_many :following, through: :active_relationships, source: :followed
+  
+  #リスト 14.12: 受動的関係を使ってuser.followersを実装する
+  has_many :followers, through: :passive_relationships, source: :follower
+   
   #getter setter
   attr_accessor :remember_token, :activation_token, :reset_token
   #リスト 11.3: Userモデルにアカウント有効化のコードを追加する
@@ -107,6 +122,23 @@ class User < ApplicationRecord
   # current_user.microposts
   def feed
     Micropost.where("user_id = ?", self.id)
+  end
+  
+  #リスト 14.10: "following" 関連のメソッド
+  # ユーザーをフォローする
+  def follow(other_user)
+    self.active_relationships.create(followed_id: other_user.id)
+  end
+
+  # ユーザーをフォロー解除する
+  def unfollow(other_user)
+    self.active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  # 現在のユーザーがフォローしてたらtrueを返す
+  def following?(other_user)
+    self.following.include?(other_user)
+    #[1,2,3,4,5].include?(1) duck_typing <- 裏でsqlで実行される
   end
   
   
