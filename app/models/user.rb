@@ -120,8 +120,24 @@ class User < ApplicationRecord
   # current_user.feed
   # current_user.id
   # current_user.microposts
+  # ユーザーのステータスフィードを返す
   def feed
-    Micropost.where("user_id = ?", self.id)
+    #Micropost.where("user_id = ?", self.id)
+    #リスト 14.44: とりあえず動くフィードの実装
+    #Micropost.where("user_id IN (?) OR user_id = ?", self.following_ids, self.id)
+    #sql 式展開→SQLインジェクション問題が起きる可能性が高い！ 上の方法で対策が施している！
+    
+    #リスト 14.46: whereメソッド内の変数に、キーと値のペアを使う　←シンボル使用
+    #Micropost.where("user_id IN (:following_ids) OR user_id = :user_id",
+    #following_ids: following_ids,
+    #      user_id: id)
+          
+          
+    #リスト 14.47: フィードの最終的な実装 <- 最適化（クエリを一回で済む）
+    following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: id) 
+          
   end
   
   #リスト 14.10: "following" 関連のメソッド
