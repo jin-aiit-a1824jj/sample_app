@@ -19,7 +19,16 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   
-  resources :users
+  #resources :users
+  #リスト 14.15: Usersコントローラにfollowingアクションとfollowersアクションを追加する
+  resources :users do
+    member do
+      #/users/:id/ ...
+      get :following, :followers
+      #GET /users/1/following -> following aciton
+      #GET /users/1/followers -> followers aciton
+    end
+  end
   
   
   #リスト 11.1: アカウント有効化に使うリソース
@@ -34,6 +43,9 @@ Rails.application.routes.draw do
   
   #リスト 13.30: マイクロポストリソースのルーティング
   resources :microposts,          only: [:create, :destroy]
+  
+  #リスト 14.20: Relationshipリソース用のルーティングを追加する
+  resources :relationships,       only: [:create, :destroy]
   
   # => contact_path
   

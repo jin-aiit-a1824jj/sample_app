@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 #リスト 10.43: データベース上にサンプルユーザーを生成するRailsタスク
+# ユーザー
 # ! <- create失敗した時、false 生成中止
 User.create!(name:  "Example User",
              email: "example@railstutorial.org",
@@ -29,8 +30,18 @@ User.create!(name:  "Example User",
 end
 
 #リスト 13.25: サンプルデータにマイクロポストを追加する
+# マイクロポスト
 users = User.order(:created_at).take(6)
 50.times do
   content = Faker::Lorem.sentence(5)
   users.each { |user| user.microposts.create!(content: content) }
 end
+
+#リスト 14.14: サンプルデータにfollowing/followerの関係性を追加する
+# リレーションシップ
+users = User.all
+user  = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }

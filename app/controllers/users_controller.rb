@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
   #リスト 10.15: beforeフィルターにlogged_in_userを追加する #リスト 10.19: セキュリティモデルを確認するためにbeforeフィルターをコメントアウトする
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]#リスト 10.35: indexアクションにはログインを要求する#リスト 10.58: 実際に動作するdestroyアクションを追加する
-  #リスト 10.25: beforeフィルターを使って編集/更新ページを保護する
+  #リスト 10.35: indexアクションにはログインを要求する#リスト
+  #10.58: 実際に動作するdestroyアクションを追加する
+  #リスト 14.25: followingアクションとfollowersアクション
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
+  
+  #リスト 10.25: beforeフィルターを使って編集/更新ページを保護する 
   before_action :correct_user,   only: [:edit, :update]
   #リスト 10.59: beforeフィルターでdestroyアクションを管理者だけに限定する
   before_action :admin_user,     only: :destroy#一つだけなら配列にしなくても良い
@@ -96,6 +100,22 @@ class UsersController < ApplicationController
     flash[:success] = "User deleted"
     redirect_to users_url
   end
+
+  #リスト 14.25: followingアクションとfollowersアクション
+  def following
+    @title = "Following"
+    @user  = User.find(params[:id])
+    @users = @user.following.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
 
   private
   
