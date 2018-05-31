@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'rails_helper'
 
-describe 'micropost' do
+describe 'micropost_models' do
 
   before do
    @user = create(:michael)

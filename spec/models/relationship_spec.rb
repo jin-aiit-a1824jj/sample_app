@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'rails_helper'
 
-describe 'relationship' do
+describe 'relationship_models' do
 
   before do
     

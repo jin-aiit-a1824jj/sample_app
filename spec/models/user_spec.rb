@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'rails_helper'
 
-describe 'user' do
+describe 'user_models' do
   
   before do
    @user = User.new(name: "Example User",
