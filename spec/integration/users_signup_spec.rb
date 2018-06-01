@@ -11,10 +11,6 @@ describe "Users_signup_Test" , :type => :request do
     ActionMailer::Base.deliveries.clear
   end
 
-  after(:all) do
-   # ActionMailer::Base.deliveries.clear
-  end
-
   it "invalid signup information" do
     get signup_path
     

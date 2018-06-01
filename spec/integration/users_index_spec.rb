@@ -35,11 +35,11 @@ describe "Users_index_Test" , :type => :request do
       end
     end
 
-    before_user_count = User.count
-    delete user_path(@non_admin)
-    after_user_count = User.count
-    
-    expect( after_user_count - before_user_count ).to eq -1
+    expect{
+      delete user_path(@non_admin)
+    }.to change{
+      User.count
+    }.by(-1)
   
   end
 
