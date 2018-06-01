@@ -1,23 +1,9 @@
 require 'spec_helper'
 require 'rails_helper'
-#require './test/test_helper'
-
-module LoginModule
-  
-  # テストユーザーがログイン中の場合にtrueを返す
-  def is_logged_in?
-    !session[:user_id].nil?
-  end
-  
-  # テストユーザーとしてログインする
-  def log_in_as(user)
-    session[:user_id] = user.id
-  end
-  
-end
+require 'login_helper'
 
 
-describe "UsersSignupTest" , :type => :request do
+describe "Users_signup_Test" , :type => :request do
 
   include LoginModule
   
