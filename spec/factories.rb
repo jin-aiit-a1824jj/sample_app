@@ -42,5 +42,18 @@ FactoryBot.define do
     follower :michael
     followed :lana
    end
+   
+   #microposts_controller_spec
+   factory :orange, class: Micropost do
+    content "I just ate an orange!"
+    created_at 10.minutes.ago
+    user User.first
+   end
+  
+   factory :ants, class: Micropost do
+    content "Oh, is that what you want? Because that's how you get ants!"
+    created_at 2.years.ago
+    user User.second
+   end
   
 end
