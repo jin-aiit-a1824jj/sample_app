@@ -36,5 +36,11 @@ FactoryBot.define do
     created_at Time.zone.now
     user User.first
    end
+   
+   #relationships_controller_spec
+   factory :one, class: Relationship do
+    follower :michael
+    followed :lana
+   end
   
 end
