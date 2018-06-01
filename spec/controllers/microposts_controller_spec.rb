@@ -12,18 +12,18 @@ describe "microposts_controller_Test" , :type => :request do
   end
 
   it "should redirect create when not logged in" do
-    before_Micropost_count = Micropost.count
-    post microposts_path, params: { micropost: { content: "Lorem ipsum" } }
-    after_Micropost_count = Micropost.count
-    expect(before_Micropost_count).to eq after_Micropost_count
+    expect{
+      post microposts_path, params: { micropost: { content: "Lorem ipsum" } }
+    }.to_not change{Micropost.count}
+    
+    
     assert_redirected_to login_url
   end
 
   it "should redirect destroy when not logged in" do
-    before_Micropost_count = Micropost.count
-    delete micropost_path(@micropost)
-    after_Micropost_count = Micropost.count
-    expect(before_Micropost_count).to eq after_Micropost_count
+    expect{
+      delete micropost_path(@micropost)
+    }.to_not change{Micropost.count}
     assert_redirected_to login_url
   end
   
@@ -31,10 +31,9 @@ describe "microposts_controller_Test" , :type => :request do
   it "should redirect destroy for wrong micropost" do
     log_in_as(User.first)
     micropost = create(:ants)
-    before_Micropost_count = Micropost.count
-    delete micropost_path(micropost)
-    after_Micropost_count = Micropost.count
-    expect(before_Micropost_count).to eq after_Micropost_count
+    expect{
+      delete micropost_path(micropost)
+    }.to_not change{Micropost.count}
     assert_redirected_to root_url
   end
 

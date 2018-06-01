@@ -54,19 +54,17 @@ describe "User_controller_Test" , :type => :request do
   end
 
   it "should redirect destroy when not logged in" do
-    before_user_count = User.count
-    delete user_path(@user)
-    after_user_count = User.count
-    expect(before_user_count).to eq after_user_count
+    expect{
+      delete user_path(@user)
+    }.to_not change{User.count}
     assert_redirected_to login_url
   end
 
   it "should redirect destroy when logged in as a non-admin" do
     log_in_as(@other_user)
-    before_user_count = User.count
-    delete user_path(@user)
-    after_user_count = User.count
-    expect(before_user_count).to eq after_user_count
+    expect{
+      delete user_path(@user)
+    }.to_not change{User.count}
     assert_redirected_to root_url
   end
 
