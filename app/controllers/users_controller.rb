@@ -53,7 +53,7 @@ class UsersController < ApplicationController
       
       #リスト 11.23: ユーザー登録にアカウント有効化を追加する
       #UserMailer.account_activation(@user).deliver_now
-      flash[:info] = "Please check your email to activate your account."
+      flash[:info] = I18n.t 'user_message'#  "Please check your email to activate your account."
       redirect_to root_url
       
       #log_in @user #ユーザー登録中にログインする
@@ -84,7 +84,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       #success
-      flash[:success] = "Profile updated"
+      flash[:success] = I18n.t 'user_profile' #"Profile updated"
       redirect_to @user
     else
       #false
@@ -97,7 +97,7 @@ class UsersController < ApplicationController
   #DELETE /users/:id
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash[:success] = I18n.t 'user_delete' #"User deleted"
     redirect_to users_url
   end
 

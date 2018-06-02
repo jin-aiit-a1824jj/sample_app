@@ -31,9 +31,9 @@ class SessionsController < ApplicationController
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         redirect_back_or user
       else
-        message  = "Account not activated. "
-        message += "Check your email for the activation link."
-        flash[:warning] = message
+        #message  = "Account not activated. "
+        #message += "Check your email for the activation link."
+        flash[:warning] = I18n.t 'session_combination_not_activate' #message
         redirect_to root_url
       end
 
@@ -41,7 +41,7 @@ class SessionsController < ApplicationController
       # エラーメッセージを作成する
       #flash[:danger] = 'Invaild email/password combination'
       #flash 次のリクエストがくるまで生きている flash.nowを使う
-      flash.now[:danger] ='Invaild email/password combination'
+      flash.now[:danger] = I18n.t 'session_combination_fail' #'Invaild email/password combination'
       render 'new'
     end
   end

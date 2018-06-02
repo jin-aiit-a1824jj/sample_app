@@ -17,10 +17,10 @@ class PasswordResetsController < ApplicationController
     if @user
       @user.create_reset_digest
       @user.send_password_reset_email
-      flash[:info] = "Email sent with password reset instructions"
+      flash[:info] = I18n.t 'pw_reset_message' #"Email sent with password reset instructions"
       redirect_to root_url
     else
-      flash.now[:danger] = "Email address not found"
+      flash.now[:danger] = I18n.t 'pw_reset_not_find' #"Email address not found"
       render 'new'
     end
   
@@ -43,7 +43,7 @@ class PasswordResetsController < ApplicationController
       render 'edit'
     elsif @user.update_attributes(user_params)          # (4) への対応 新しいパスワードが正しければ、更新する
       log_in @user
-      flash[:success] = "Password has been reset."
+      flash[:success] = I18n.t 'pw_reset_success' #"Password has been reset."
       redirect_to @user
     else
       render 'edit'                                     # (2) への対応 無効なパスワードであれば失敗させる (失敗した理由も表示する)
@@ -73,7 +73,7 @@ class PasswordResetsController < ApplicationController
     # トークンが期限切れかどうか確認する
     def check_expiration
       if @user.password_reset_expired?
-        flash[:danger] = "Password reset has expired."
+        flash[:danger] = I18n.t 'pw_reset_expired' #"Password reset has expired."
         redirect_to new_password_reset_url
       end
     end

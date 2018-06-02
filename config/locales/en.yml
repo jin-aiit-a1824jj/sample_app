@@ -31,3 +31,52 @@
 
 en:
   hello: "Hello world"
+
+#/sample_app/app/controllers/account_activations_controller.rb:
+#	15:         flash[:success] = "Account activated!"
+#	19:         flash[:danger] = "Invalid activation link"
+  active_success: "Account activated!"
+  active_failuse: "Invalid activation link"
+
+#/sample_app/app/controllers/application_controller.rb:
+#	23:         flash[:danger] = "Please log in."
+  log_in: "Please log in."
+
+#/sample_app/app/controllers/microposts_controller.rb:
+#	12:       flash[:success] = "Micropost created!"
+#	24:     flash[:success] = "Micropost deleted"
+  micropost_success: "Micropost created!"
+  micropost_delete: "Micropost deleted"
+
+#/sample_app/app/controllers/password_resets_controller.rb:
+#	20:       flash[:info] = "Email sent with password reset instructions"
+#	23:       flash.now[:danger] = "Email address not found"
+#	46:       flash[:success] = "Password has been reset."
+#	76:         flash[:danger] = "Password reset has expired."
+
+  pw_reset_message: "Email sent with password reset instructions"
+  pw_reset_not_find: "Email address not found"
+  pw_reset_success: "Password has been reset."
+  pw_reset_expired: "Password reset has expired."
+
+# /sample_app/app/controllers/sessions_controller.rb:
+# 	36:       flash[:warning] = message
+# 	42:       #flash[:danger] = 'Invaild email/password combination'
+# 	43:       #flash 次のリクエストがくるまで生きている flash.nowを使う
+# 	44:       flash.now[:danger] ='Invaild email/password combination'
+  session_combination_not_activate: "Account not activated. Check your email for the activation link."
+  session_combination_fail: "Invaild email/password combination"
+
+# /sample_app/app/controllers/users_controller.rb:
+# 	56:       flash[:info] = "Please check your email to activate your account."
+# 	60:       #flash[:success] = "Welcome to the Sample App!"
+# 	87:       flash[:success] = "Profile updated"
+# 	100:     flash[:success] = "User deleted"
+
+  user_message: "Please check your email to activate your account."
+  user_profile: "Profile updated"
+  user_delete: "User deleted"
+  
+  # _error_messages.html.erb
+  #the_form_contains: "フォームが含まれています"
+  error_text: "errors"
