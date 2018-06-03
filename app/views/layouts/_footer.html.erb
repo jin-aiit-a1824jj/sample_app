@@ -8,8 +8,10 @@
       <li><%= link_to "About",   about_path %></li>
       <li><%= link_to "Contact", contact_path %></li>
       <li><a href="http://news.railstutorial.org/">News</a></li>
-      <li><%= link_to '日本語', to_japaness_path %></li>
-      <li><%= link_to 'English', to_english_path %></li>
+      <li><%= link_to "日本語", to_japaness_path, method: :get,
+                                                  data: { confirm: "日本語のエラー表示しますか? OKボタンを押したらホーム画面に戻ります。" } %></li>
+      <li><%= link_to 'English', to_english_path, method: :get,
+                                                  data: { confirm: "Do you see errors in English? Press the OK button to return to the home screen" } %></li>
     </ul>
   </nav>
 </footer>
