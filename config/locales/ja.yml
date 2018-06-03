@@ -267,5 +267,5 @@ ja:
   
 
 # _error_messages.html.erb
-  the_form_contains: "フォームが含まれています"
-  error_text: "エラー"
+  the_form_contains: ""#"フォームが含まれています"
+  error_text: "フォームに %{num} エラーが含まれています"

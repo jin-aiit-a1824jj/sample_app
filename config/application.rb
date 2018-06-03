@@ -32,7 +32,8 @@ module SampleApp
       g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
     
-    I18n.available_locales = %i(ja en)
+    config.i18n.default_locale = :en
+    I18n.available_locales = %i(en ja)
     I18n.enforce_available_locales = true
     I18n.default_locale = :en
     

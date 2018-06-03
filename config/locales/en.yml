@@ -79,4 +79,4 @@ en:
   
   # _error_messages.html.erb
   #the_form_contains: "フォームが含まれています"
-  error_text: "errors"
+  error_text: "%{num} errors"

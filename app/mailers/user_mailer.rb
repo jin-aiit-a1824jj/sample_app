@@ -11,7 +11,7 @@ class UserMailer < ApplicationMailer
     # -> app/views/user_mailer/account_activation.text.erb
     # -> app/views/user_mailer/account_activation.html.erb
   #end
-
+  
   #リスト 11.12: アカウント有効化リンクをメール送信する
   def account_activation(user)
     @user = user
