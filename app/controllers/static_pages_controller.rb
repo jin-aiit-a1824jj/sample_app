@@ -25,4 +25,16 @@ class StaticPagesController < ApplicationController
     #app/views/static_pages/contact.html.erb
   end
   
+  def japaness
+    I18n.locale = :ja
+    Rails.application.routes.default_url_options = { locale: I18n.locale }
+    redirect_to root_path
+  end
+  
+  def english
+    I18n.locale = :en
+    Rails.application.routes.default_url_options = { locale: I18n.locale }
+    redirect_to root_path
+  end
+  
 end

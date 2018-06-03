@@ -57,5 +57,7 @@ Rails.application.routes.draw do
   #root 'application#hello'
   #
   
+  get 'to_japaness', to: 'static_pages#japaness'
+  get 'to_english', to: 'static_pages#english'
   
 end
